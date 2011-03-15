@@ -1,6 +1,6 @@
 # jQuery Secret Plugin
 
-A jQuery plugin that prevent creating global objects.
+A jQuery plugin that prevents creating global objects.
 
 ## Description
 
@@ -142,16 +142,27 @@ However in a bigger project when you want to split your code into modules with d
 > basicly you can store anything you want
 
 ### Namespace
-`$.secret()` has 1 layer namespace support. With large application we might need to split our code into modules. For example: 
+`$.secret()` has 1 layer namespace support. With large application we might need to split our code into modules.
+> Example code: 
     
     // create a function that generates flickr api sig
     $.secret( 'in', 'FLICKR.apiSig', function( args ){
       // here 'this.defaultParams' equals to 'FLICKR.defaultParams'
       return md5( args.secret + this.defaultParams.concat( args.extraParams.split( "&" ) ).sort().join('').replace( '=', '' ));
     });
+    
+    // another function for searching images on google
+    $.secret( 'in', 'GOOGLE.searchImage', function( args ){
+      // do other stuffs here
+    }
+    
+    // assamble your code in the sandbox
+    $.secret( 'in', 'SANDBOX.moduleName', function( args ){
+      // assamble your code here
+    }
 
 ## Demo
-Please see demo.html
+See demo/index.html
 
 ## License
 
