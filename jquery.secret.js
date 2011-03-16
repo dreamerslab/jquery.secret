@@ -3,7 +3,7 @@
 *
 * Version: 1.0.0
 *
-* Requires: any version of jQuery
+* Requires: jQuery 1.2.3+
 */
 
 // wrap everything in an anonymous function
@@ -41,8 +41,12 @@
       // if it is, return the executed result
       // otherwise return stored data
       var tmp = _[ namespace ][ name ];
-      if( $.isFunction( tmp )) return tmp( args );
-      else return tmp;
+      if( $.isFunction( tmp )){
+        tmp.call( _[ namespace ], args ); 
+        return self;
+      }else{
+        return tmp;
+      }
     },
 
     // clear data

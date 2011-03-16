@@ -52,6 +52,13 @@ However in a bigger project when you want to split your code into modules with d
     
     $.secret( 'in', 'lang', 'en' );
     
+> The 'in' and 'clear' methods are chainable
+    
+    $.secret( 'in', 'name', 'Ben' ).
+      secret( 'in', 'age', 30 ).
+      secret( 'in', 'sport', [ 'basketball', 'baseball' ]),
+      secret( 'clear', 'jobs' );
+      
 > Use your data; you can even use it in different files.
     
     var lang = $.secret( 'out', 'lang' );
@@ -139,7 +146,7 @@ However in a bigger project when you want to split your code into modules with d
       }
     });
     
-> basicly you can store anything you want
+> basicly you can store anything you want.
 
 ### Namespace
 `$.secret()` has 1 layer namespace support. With large application we might need to split our code into modules.
