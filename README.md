@@ -26,7 +26,7 @@ Better, but not good enough. The data is still touchable by every script on the 
 However in a bigger project when you want to split your code into modules with different files you can no longer use this technique. This is where jQuery.secret comes to shine.
 
 ## Requires
-  - jQuery 1.2.3+
+  - jQuery 1.3.0+
 
 ## Browser Compatibility
   - [Firefox](http://mzl.la/RNaI) 2.0+
@@ -46,7 +46,7 @@ However in a bigger project when you want to split your code into modules with d
 
 ## Usage
 
-####Example code:
+#### Example code:
 
 > Store your data.
     
@@ -153,9 +153,9 @@ However in a bigger project when you want to split your code into modules with d
 > Example code: 
     
     // create a function that generates flickr api sig
-    $.secret( 'in', 'FLICKR.apiSig', function( args ){
+    $.secret( 'in', 'FLICKR.apiSig', function( secret, extraParams ){
       // here 'this.defaultParams' equals to 'FLICKR.defaultParams'
-      return md5( args.secret + this.defaultParams.concat( args.extraParams.split( "&" ) ).sort().join('').replace( '=', '' ));
+      return md5( secret + this.defaultParams.concat( extraParams.split( "&" ) ).sort().join('').replace( '=', '' ));
     });
     
     // another function for searching images on google

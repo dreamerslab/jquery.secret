@@ -3,7 +3,7 @@
 *
 * Version: 1.0.0
 *
-* Requires: jQuery 1.2.3+
+* Requires: jQuery 1.3.0+
 */
 
 // wrap everything in an anonymous function
@@ -40,9 +40,10 @@
       // to tell if the store secret is a function
       // if it is, return the executed result
       // otherwise return stored data
-      var tmp = _[ namespace ][ name ];
+      var tmp = _[ namespace ][ name ], _args;
       if( $.isFunction( tmp )){
-        tmp.call( _[ namespace ], args ); 
+        _args = $.isArray( args ) ? args : [ args ];
+        tmp.apply( _[ namespace ], _args ); 
         return self;
       }else{
         return tmp;
