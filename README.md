@@ -4,7 +4,7 @@ A jQuery plugin that prevents creating global objects.
 
 ## Description
 
-[Global objects are evil in javascript](http://bit.ly/e6DUOi). They are easily to be overwritten, especially when you mix your code with others. For more details please take a look at Douglas Crockford's artical at [Yahoo! User Interface Blog (YUIBlog)](http://yuiblog.com/blog/2006/06/01/global-domination/). To fix this people often come up with wrapping their code with a namespace. For example:
+[Global objects are evil in javascript](http://bit.ly/e6DUOi). They are easily to be overwritten, especially when you mix your code with others. For more details please take a look at Douglas Crockford's artical at [Yahoo! User Interface Blog (YUIBlog)](http://yuiblog.com/blog/2006/06/01/global-domination/). To fix this can wrap our code with a namespace. For example:
 
     someNamespace = {
       lang : 'en',
