@@ -38,9 +38,7 @@
       <p>
         This demo shows how to pass data to different js files without using global.
       </p>
-      <p>
-        <h3>Code in common.js</h3>
-      </p>
+      <h3>Code in common.js</h3>
       <pre>
         // store some common data and methods 
         // which are going to be use through out the whole application
@@ -77,13 +75,12 @@
             if( callback ) callback.call( this );
           });
       </pre>
-      <p>
-        <h3>Code in another.js</h3>
-      </p>
+
+      <h3>Code in another.js</h3>
       <pre>
         // wrap code in a document ready function
         $( function(){
-          // trigger all the 
+
           $( '#click-me' ).bind( 'click', function(){
             // pass the $( '#play-ground' ) to $.secret private obj
             $.secret( 'in', '$playground', $( '#play-ground' )).
@@ -95,10 +92,11 @@
                 alert( 'callback function from showAge' );
               }).secret( 'out', 'showSports', function(){
                 alert( 'callback function from showSports' );
-              })
+              });
           });
         });
       </pre>
+
       <p>Click the button to see how these code works, you can check Firebug in the DOM panel to see if there is any global object.</p>
       <div id="fire">
         <div id="click-me">THE BUTTON</div>
