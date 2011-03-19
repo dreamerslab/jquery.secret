@@ -65,7 +65,7 @@ However in a bigger project when you want to split your code into modules with d
 
     $.secret( 'call', 'secretName', [ arg1, arg2, arg3 ]);
     // or
-    $.secret( 'excute', 'secretName', arg );
+    $.secret( 'call', 'secretName', arg );
 
 > clear data
 

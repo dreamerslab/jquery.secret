@@ -8,7 +8,7 @@
 
 // wrap everything in an anonymous function
 ;( function( $ ){
-  
+
   // self will be over written by jquery instance "this"
   // a higher scope let private mathods to access jquery obj
   var self,
@@ -18,13 +18,13 @@
 
   // private props
   _ = {
-    // default place to store secret data 
+    // default place to store secret data
     trunk : {}
   },
 
   publicMethods = {
 
-    // store string, integer, function, array whatever you want 
+    // store string, integer, function, array whatever you want
     // in a namespace under '_' in an anonymous function to prevent global
     'in' : function( name, args ){
       // build new namespace if it is not found
@@ -45,7 +45,7 @@
       }
       return false;
     },
-    
+
     // call out secret function
     'call' : function( name, args ){
       var tmp;
@@ -54,13 +54,13 @@
         // execute store function
         tmp = _[ namespace ][ name ];
         if( $.isFunction( tmp )){
-          tmp.apply( _[ namespace ], $.isArray( args ) ? args : [ args ]); 
+          tmp.apply( _[ namespace ], $.isArray( args ) ? args : [ args ]);
         }else{
           throw '$.secret error: on action "call" - "' + name + '" is not a function';
         }
-        // return self to enable chaining
-        return self;
       }
+      // return self to enable chaining
+      return self;
     },
 
     // clear data
@@ -89,12 +89,12 @@
     if( name === undefined || typeof( name ) !== 'string' ){
       throw '$.secret error: on action "' + action + '" - second argument "' + name + '" is undefined or is not a string';
     }
-    
+
     // !IMPORTANT, do not use 'var' here
     // store jquery 'this' to 'self' so that it can be access
     // outside of the plugin scope
     self = this;
-    
+
     // check if the action name has a name space
     tmp = name.split( '.' );
 
