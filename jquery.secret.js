@@ -37,22 +37,29 @@
       return self;
     },
 
-    // withdraw data or execute stored function
-    out : function( name, args ){
-      var tmp, _args;
+    // withdraw data
+    out : function( name ){
       // make sure the calling out name exist, otherwise do nothing
       if( _[ namespace ] !== undefined && _[ namespace ][ name ] !== undefined ){
-        // if the stored secret is a function, 
-        // execute it and return self to enable chaining
-        // otherwise return stored data
-        tmp = _[ namespace ][ name ], _args;
+        return _[ namespace ][ name ];
+      }
+      return false;
+    },
+    
+    // call out secret function
+    'call' : function( name, args ){
+      var tmp;
+      // make sure the calling function exist, otherwise do nothing
+      if( _[ namespace ] !== undefined && _[ namespace ][ name ] !== undefined ){
+        // execute store function
+        tmp = _[ namespace ][ name ];
         if( $.isFunction( tmp )){
-          _args = $.isArray( args ) ? args : [ args ];
-          tmp.apply( _[ namespace ], _args ); 
-          return self;
+          tmp.apply( _[ namespace ], $.isArray( args ) ? args : [ args ]); 
         }else{
-          return tmp;
+          throw '$.secret error: on action "call" - "' + name + '" is not a function';
         }
+        // return self to enable chaining
+        return self;
       }
     },
 
@@ -80,7 +87,7 @@
 
     // make sure user pass the second arg
     if( name === undefined || typeof( name ) !== 'string' ){
-      throw '$.secret error: second argument "name" is undefined or is not a string';
+      throw '$.secret error: on action "' + action + '" - second argument "' + name + '" is undefined or is not a string';
     }
     
     // !IMPORTANT, do not use 'var' here
@@ -102,7 +109,7 @@
       _name = name;
     }
 
-    // execute 'in', 'out' or 'clear' and return the result
+    // execute 'in', 'out', 'call' or 'clear' and return the result
      return publicMethods[ action ]( _name, args );
   };
 

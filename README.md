@@ -46,17 +46,44 @@ However in a bigger project when you want to split your code into modules with d
 
 ## Usage
 
+#### Syntax
+> Store data
+    
+    // val can be a string, integer, hash table, array, object
+    $.secret( 'in', 'secretName', val );
+    
+    // or a function
+    $.secret( 'in', 'secretName', function( arg1, arg2, arg3 ){
+      // do something here
+    });
+    
+> Withdraw data
+    
+    $.secret( 'out', 'secretName' );
+
+> Call out a function
+
+    $.secret( 'call', 'secretName', [ arg1, arg2, arg3 ]);
+    // or
+    $.secret( 'excute', 'secretName', arg );
+
+> clear data
+
+    $.secret( 'clear', 'secretName' );
+    
+
 #### Example code:
 
-> Store your data.
+> Store data.
     
     $.secret( 'in', 'lang', 'en' );
     
-> The 'in' and 'clear' methods are chainable
+> 'in', 'call', and 'clear' methods are chainable
     
     $.secret( 'in', 'name', 'Ben' ).
       secret( 'in', 'age', 30 ).
       secret( 'in', 'sport', [ 'basketball', 'baseball' ]),
+      secret( 'call', 'showName', $( '#name' )).
       secret( 'clear', 'jobs' );
       
 > Use your data; you can even use it in different files.
@@ -125,37 +152,32 @@ However in a bigger project when you want to split your code into modules with d
     
     // to use this funciton
     // we can pass arguments in the 3rd parameter
-    $.secret( 'out', 'getCheckedVal', $( '#somewhere' ).find( ':checkbox' ));
+    $.secret( 'call', 'getCheckedVal', $( '#somewhere' ).find( ':checkbox' ));
     
     // create function with multiple arguments
-    $.secret( 'in', 'pplDoSomething', function( args ){
-      var $ppl = args.$ppl;
-      $ppl.find( '.eyes' ).text( args.eyes );
-      $ppl.find( '.car' ).text( args.car );
-      if( args.callback ) callback.call( this );
+    $.secret( 'in', 'pplDoSomething', function( $ppl, eyes, car, callback ){
+      $ppl.find( '.eyes' ).text( eyes );
+      $ppl.find( '.car' ).text( car );
+      if( callback ) callback.call( this );
     });
     
-    // use function with multiple arguments
-    $.secret( 'out', 'pplDoSomething', {
-      $ppl : $( '#ben' ),
-      eyes : 'brown',
-      car : 'porsche!!!',
-      callback : function(){
+    // call function with multiple arguments
+    $.secret( 'call', 'pplDoSomething', 
+      [ $( '#ben' ), 'brown', 'porsche!!!', function(){
         // do something here
         // IMPORTANT 'this' here points to the private $.secret object
-      }
-    });
+      }]);
     
 > basicly you can store anything you want.
 
 ### Namespace
-`$.secret()` has 1 layer namespace support. With large application we might need to split our code into modules.
+`$.secret` supports 1 layer namespace. With large application we might need to split our code into modules.
 > Example code: 
     
     // create a function that generates flickr api sig
     $.secret( 'in', 'FLICKR.apiSig', function( secret, extraParams ){
       // here 'this.defaultParams' equals to 'FLICKR.defaultParams'
-      return md5( secret + this.defaultParams.concat( extraParams.split( "&" ) ).sort().join('').replace( '=', '' ));
+      return md5( secret + this.defaultParams.concat( extraParams.split( "&" )).sort().join('').replace( '=', '' ));
     });
     
     // another function for searching images on google

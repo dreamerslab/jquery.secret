@@ -6,11 +6,11 @@ $( function(){
     $.secret( 'in', '$playground', $( '#play-ground' )).
     
       // execute predefined methods
-      secret( 'out', 'showName', function(){
+      secret( 'call', 'showName', function(){
         alert( 'callback function from showName' );
-      }).secret( 'out', 'showAge', function(){
+      }).secret( 'call', 'showAge', function(){
         alert( 'callback function from showAge' );
-      }).secret( 'out', 'showSports', function(){
+      }).secret( 'call', 'showSports', function(){
         alert( 'callback function from showSports' );
       });
   });
