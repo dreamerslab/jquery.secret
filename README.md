@@ -191,7 +191,13 @@ However in a bigger project when you want to split your code into modules with d
     }
 
 ## Demo
-See demo/index.html
+ - Please see demo.html
+ - Online version please take a look at [this](http://dreamerslab.com/demos/hide-global-objects-in-javascript)
+
+## Documentation
+  - There is a syntax highlight version, please see [this post](http://dreamerslab.com/blog/en/hide-javascript-global-objects-with-jquery-secret-plugin/)
+  - For chinese version please go [here](http://dreamerslab.com/blog/tw/hide-javascript-global-objects-with-jquery-secret-plugin/)
+
 
 ## License
 
