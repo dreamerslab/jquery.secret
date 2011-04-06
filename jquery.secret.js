@@ -27,18 +27,22 @@
     // store string, integer, function, array whatever you want
     // in a namespace under '_' in an anonymous function to prevent global
     'in' : function( name, args ){
+      
       // build new namespace if it is not found
       if( _[ namespace ] === undefined ){
         _[ namespace ] = {};
       }
+      
       // store data
       _[ namespace ][ name ] = args;
+      
       // return self to enable chaining
       return self;
     },
 
     // withdraw data
     out : function( name ){
+      
       // make sure the calling out name exist, otherwise do nothing
       if( _[ namespace ] !== undefined && _[ namespace ][ name ] !== undefined ){
         return _[ namespace ][ name ];
@@ -49,8 +53,10 @@
     // call out secret function
     'call' : function( name, args ){
       var tmp;
+      
       // make sure the calling function exist, otherwise do nothing
       if( _[ namespace ] !== undefined && _[ namespace ][ name ] !== undefined ){
+        
         // execute store function
         tmp = _[ namespace ][ name ];
         if( $.isFunction( tmp )){
@@ -59,6 +65,7 @@
           throw '$.secret error: on action "call" - "' + name + '" is not a function';
         }
       }
+      
       // return self to enable chaining
       return self;
     },
@@ -66,6 +73,7 @@
     // clear data
     clear : function( name ){
       var found = false, prop;
+      
       // check if the name is a namespace
       for( prop in _ ){
         if( prop === name ){
@@ -73,10 +81,12 @@
           break;
         }
       }
+      
       // if it is a namespace, delete the whole namespace
       // otherwise just delete the prop under that namespace
       if( found ) delete _[ name ];
       else delete _[ namespace ][ name ];
+      
       // return self to enable chaining
       return self;
     }
@@ -112,5 +122,4 @@
     // execute 'in', 'out', 'call' or 'clear' and return the result
      return publicMethods[ action ]( _name, args );
   };
-
 })( jQuery );
